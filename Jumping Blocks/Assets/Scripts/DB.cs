@@ -1,30 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 
+public class DB: MonoBehaviour {
+	public long topScore = 0;
 
-public class DB : MonoBehaviour {
+	public float playerScore = 0f;
+
+	private DatabaseReference db;
+
+	public Text text;
 
 
-
-	// Use this for initialization
-	void Start () {
-		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://jumping-blocks.firebaseio.com/");
-		DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-		FirebaseDatabase.DefaultInstance
-			.GetReference("jumping-blocks")
-			.ValueChanged += HandleValueChanged;
+	void Awake() {
+		playerScore =  GameObject.FindObjectOfType<ScoreKeeper>().score;
 	}
 
-	void HandleValueChanged(object sender, ValueChangedEventArgs args) {
-		if (args.DatabaseError != null) {
-			Debug.LogError (args.DatabaseError.Message);
-			return;
-		}
-		print (args.Snapshot);
+	void Start() {
+		// Set this before calling into the realtime database.
+		FirebaseApp.DefaultInstance.SetEditorDatabaseUrl ("https://jumping-blocks.firebaseio.com/");
+
+		// Get the root reference location of the database, from which we will operate on the database.
+		db = FirebaseDatabase.DefaultInstance.GetReference ("scores");
+
+		GetTopScore ();
+
 	}
+
+
+	 void GetTopScore(){
+		db.GetValueAsync().ContinueWith(task => {
+			if (task.IsFaulted) {
+				Debug.Log("error");
+			}
+			else if (task.IsCompleted) {
+				Dictionary<string, object> results = (Dictionary<string, object>) task.Result.Value;
+				topScore = (long) results["topScore"];
+				print(topScore);
+				print(playerScore);
+				if(playerScore > topScore){
+					PushToDB(playerScore);
+					text.text = "World Score: " + playerScore;
+				}
+				else  {
+					text.text = "World Score: " + topScore;
+				}
+			}
+		});
+	
+	}
+
+	 void PushToDB(float PlayerScore){
+		db.Child ("topScore").SetValueAsync (PlayerScore);
+	}
+
+
+
 
 }
