@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour {
 //  
 	void FixedUpdate()
 	{
-		if(Input.GetKeyDown("space") && isGrounded == true){
+		if (Input.GetMouseButtonDown(0) && isGrounded == true){
 		rb.AddForce(transform.up * thrust);
 			isGrounded = false;
 		}

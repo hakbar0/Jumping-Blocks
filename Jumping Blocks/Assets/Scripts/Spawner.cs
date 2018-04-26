@@ -8,12 +8,14 @@ public class Spawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("SpawnBlock", 0f, 2f);
+		Invoke("SpawnBlock", 2f);
 
 	}
 	
 	void SpawnBlock(){
 		GameObject instance = Instantiate (enemy);
-		instance.transform.position = new Vector2(0f, 0f);
+		instance.transform.position = new Vector2(7f, -3f);
+		float randomTime = Random.Range(0.5f, 1.2f); 
+		Invoke("SpawnBlock", randomTime);
 	}
 }
