@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1074123724163",
+    "firebase_url": "https://jumping-blocks.firebaseio.com",
+    "project_id": "jumping-blocks",
+    "storage_bucket": "jumping-blocks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074123724163:android:b9b258bbbccae1e6",
+        "android_client_info": {
+          "package_name": "com.JumpingBlocks.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074123724163-gi4dpp4dkhe5q8l9f2irqn8ga5d53pot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC2M8YQTmU43R795sLAonVfb_KJXr0VQM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
