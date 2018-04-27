@@ -11,12 +11,12 @@ public class PlayerInput : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
-//  
+
 	void FixedUpdate()
 	{
-		if (Input.GetMouseButtonDown(0) && isGrounded == true){
-		rb.AddForce(transform.up * thrust);
+		if (Input.GetMouseButtonDown(0) && isGrounded){
 			isGrounded = false;
+			rb.AddForce(transform.up * thrust);
 		}
 	}
 
